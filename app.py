@@ -12,7 +12,6 @@ PATH = "./models"
 st.set_page_config(page_title="Drinkable Water", page_icon="🥤", layout='centered', initial_sidebar_state="collapsed")
 
 def load_models():
-
     models = []
     for mn in MODEL_NAMES:
         models.append((mn, pickle.load(open(f"{PATH}/{mn}.pkl", "rb"))))
