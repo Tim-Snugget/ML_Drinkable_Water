@@ -12,7 +12,7 @@ PATH = "./models"
 
 # y_test = np.loadtxt('./misc/y_test.txt')
 # y_test = np.array(y_test).reshape(1, -1)
-y_test = pd.Series.from_csv('./misc/y_test.txt')
+# y_test = pd.Series.from_csv('./misc/y_test.txt')
 
 st.set_page_config(page_title="Drinkable Water", page_icon="🥤", layout='centered', initial_sidebar_state="collapsed")
 
@@ -49,15 +49,15 @@ def main():
         if prediction.item() == 1:
             if not disp_accuracy:
                 col1.success(f"{name_model} : It is safe to drink that water!")
-            else:
-                accuracy = accuracy_score(y_test, prediction)
-                col1.success("{} : It is safe to drink that water!\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
+            # else:
+                # accuracy = accuracy_score(y_test, prediction)
+                # col1.success("{} : It is safe to drink that water!\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
         else:
             if not disp_accuracy:
                 col1.error(f"{name_model} : It is NOT safe to drink that water...")
-            else:
-                accuracy = accuracy_score(y_test, prediction)
-                col1.error("{} : It is NOT safe to drink that water...\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
+            # else:
+            #     accuracy = accuracy_score(y_test, prediction)
+            #     col1.error("{} : It is NOT safe to drink that water...\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
 
     with col1:
         with st.expander(" ℹ️ Information", expanded=True):
