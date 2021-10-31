@@ -21,6 +21,16 @@ def load_model(modelfile):
 	loaded_model = pickle.load(open(f"{PATH}/{modelfile}.pkl", 'rb'))
 	return loaded_model
 
+def display_drinkable(name, prediction):
+    col1.write('''
+        		    ## Results 🔍 
+        		    ''')
+    if prediction.item() == 1:
+        col1.success(f"{name} : It is safe to drink that water!")
+    else:
+        col1.error(f"{name} : It is NOT safe to drink that water...")
+
+
 def main():
     # title
     html_temp = """
@@ -56,34 +66,22 @@ def main():
         organic_carbon = st.slider("Organic Carbon", min_value=2.20, max_value=28.30, value=10.0, step=0.1)
         trihalomethanes = st.slider("Trihalomethanes", min_value=0.74, max_value=124.00, value=40.0, step=0.5)
         turbidity = st.slider("Turbidity", min_value=1.45, max_value=6.74, value=3.0, step=0.05)
-        AI_model = st.select_slider("AI model", MODEL_NAMES + ['Any'], value='Any')
+        AI_model = st.selectbox("AI model", MODEL_NAMES + ['All'], value='All')
 
         feature_list = [pH, hardness, solids, chloramines, sulfate, conductivity, organic_carbon, trihalomethanes, turbidity]
         single_pred = np.array(feature_list).reshape(1,-1)
         
         if st.button('Predict'):
 
-            if AI_model == 'Any':
+            if AI_model == 'All':
                 models = load_models()
                 for name, loaded_model in models:
                     prediction = loaded_model.predict(single_pred)
-                    col1.write('''
-                        		    ## Results 🔍 
-                        		    ''')
-                    if prediction.item() == 1:
-                        col1.success(f"{name} : It is safe to drink that water!")
-                    else:
-                        col1.error(f"{name} : It is NOT safe to drink that water...")
+                    display_drinkable(name, prediction)
             else:
                 loaded_model = load_model(AI_model)
                 prediction = loaded_model.predict(single_pred)
-                col1.write('''
-            		    ## Results 🔍 
-            		    ''')
-                if prediction.item() == 1:
-                    col1.success("It is safe to drink that water!")
-                else:
-                    col1.error("It is NOT safe to drink that water...")
+                display_drinkable(AI_model, prediction)
 
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 
