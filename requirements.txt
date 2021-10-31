@@ -1,5 +1,4 @@
 numpy==1.18.5
-streamlit==0.69.0
 plotly==4.0.0
 seaborn==0.10.1
 pandas_profiling==2.3.0
