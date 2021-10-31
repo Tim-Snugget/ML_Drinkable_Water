@@ -37,14 +37,14 @@ def main():
 
     with col2:
         st.subheader(" Find out the most suitable crop to grow in your farm 👨‍🌾")
-        pH = st.slider("pH", min_value=0.0, max_value=14.0, value=10.0, step=0.1)
-        hardness = st.slider("Hardness", min_value=47.43, max_value=323.12, value=200.0, step=1.0)
-        solids = st.slider("Solids", min_value=320.94, max_value=61227.2, value=20000.0, step=200.0)
-        chloramines = st.slider("Chloramines", min_value=0.35, max_value=13.13, value=7.0, step=0.5)
-        sulfate = st.slider("Sulfate", min_value=129.00, max_value=481.03, value=250.0, step=1.0)
-        conductivity = st.slider("Conductivity", min_value=181.48, max_value=753.34, value=300.0, step=5.0)
-        organic_carbon = st.slider("Organic Carbon", min_value=2.20, max_value=28.30, value=10.0, step=0.1)
-        trihalomethanes = st.slider("Trihalomethanes", min_value=0.74, max_value=124.00, value=40.0, step=0.5)
+        pH = st.number_input("pH", min_value=0.0, max_value=14.0, value=10.0, step=0.1)
+        hardness = st.number_input("Hardness", min_value=47.43, max_value=323.12, value=200.0, step=1.0)
+        solids = st.number_input("Solids", min_value=320.94, max_value=61227.2, value=20000.0, step=200.0)
+        chloramines = st.number_input("Chloramines", min_value=0.35, max_value=13.13, value=7.0, step=0.5)
+        sulfate = st.number_input("Sulfate", min_value=129.00, max_value=481.03, value=250.0, step=1.0)
+        conductivity = st.number_input("Conductivity", min_value=181.48, max_value=753.34, value=300.0, step=5.0)
+        organic_carbon = st.number_input("Organic Carbon", min_value=2.20, max_value=28.30, value=10.0, step=0.1)
+        trihalomethanes = st.number_input("Trihalomethanes", min_value=0.74, max_value=124.00, value=40.0, step=0.5)
         turbidity = st.slider("Turbidity", min_value=1.45, max_value=6.74, value=3.0, step=0.05)
 
         feature_list = [pH, hardness, solids, chloramines, sulfate, conductivity, organic_carbon, trihalomethanes, turbidity]
