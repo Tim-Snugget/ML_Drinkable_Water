@@ -105,14 +105,15 @@ def read_in_and_split_data(data, target):
 #                        Spot-Check Algorithms                                 #
 #                                                                              #
 ################################################################################
-def GetModel():
+def get_models():
     Models = []
-    Models.append(('LR'   , LogisticRegression()))
-    Models.append(('LDA'  , LinearDiscriminantAnalysis()))
-    Models.append(('KNN'  , KNeighborsClassifier()))
-    Models.append(('CART' , DecisionTreeClassifier()))
-    Models.append(('NB'   , GaussianNB()))
-    Models.append(('SVM'  , SVC(probability=True)))
+    Models.append(('Logistic_Regression'   , LogisticRegression()))
+    Models.append(('Decision_Tree'   , DecisionTreeClassifier()))
+    Models.append(('Gradient_Boosting'   , GradientBoostingClassifier()))
+    Models.append(('Random_Forest'  , RandomForestClassifier()))
+    Models.append(('KNeighbors'  , KNeighborsClassifier()))
+    Models.append(('Gaussian_NB'   , GaussianNB()))
+    Models.append(('SVC'  , SVC(probability=True)))
     return Models
 
 def ensemblemodels():
@@ -157,7 +158,7 @@ def NormalizedModel(nameOfScaler):
 #                           Train Model                                        #
 #                                                                              #
 ################################################################################
-def fit_model(X_train, y_train,models):
+def fit_models(X_train, y_train, models):
     # Test options and evaluation metric
     num_folds = 10
     scoring = 'accuracy'
@@ -178,8 +179,9 @@ def fit_model(X_train, y_train,models):
 #                          Save Trained Model                                  #
 #                                                                              #
 ################################################################################
-def save_model(model,filename):
-    pickle.dump(model, open(filename, 'wb'))
+def save_model(name, model):
+    PATH="./models"
+    pickle.dump(model, open(f"{PATH}/{name}.pkl", 'wb'))
 ################################################################################
 #                                                                              #
 #                          Performance Measure                                 #
@@ -228,15 +230,21 @@ X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 
 # scale inputs
 scale_inputs(X_train, X_test, y_train, y_test)
+models = get_models()
 
-# Train model
-pipeline = make_pipeline(StandardScaler(), RandomForestClassifier())
-model = pipeline.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-conf_matrix = confusion_matrix(y_test, y_pred)
-classification_metrics(pipeline, conf_matrix)
+# Train models
+names, results = fit_models(X_train, y_train, models)
 
-print(classification_report(y_pred, y_test))
+# pipeline = make_pipeline(StandardScaler(), RandomForestClassifier())
+# model = pipeline.fit(X_train, y_train)
 
-# save model
-save_model(model, 'model.pkl')
+# Test and save models
+for name, model in models:
+    pipeline = make_pipeline(MinMaxScaler(), model)
+    model = pipeline.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    classification_metrics(pipeline, conf_matrix)
+
+    save_model(name, model)
+
