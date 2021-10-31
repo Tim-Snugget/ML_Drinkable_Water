@@ -49,6 +49,11 @@ Live Demo : https://share.streamlit.io/tim-snugget/ml_drinkable_water/main/app.p
 ![](https://media.discordapp.net/attachments/897066717052801037/904338073209430057/unknown.png?width=577&height=676)
 ![](https://media.discordapp.net/attachments/897066717052801037/904338102548582410/unknown.png?width=559&height=676)
 
+# [Github and Contributors](https://github.com/Tim-Snugget/ML_Drinkable_Water)
+* [Aldric Liottier]()
+* [Pierre Marcurat]()
+* [Timothé "Tim-Snugget" Fertin](https://github.com/Tim-Snugget)
+
 # References
 EduFlow
 https://www.kaggle.com/adityakadiwal/water-potability
