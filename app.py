@@ -10,8 +10,6 @@ MODEL_NAMES = ['Logistic_Regression', 'Decision_Tree', 'Gradient_Boosting', 'Ran
 PATH = "./models"
 st.set_page_config(page_title="Drinkable Water", page_icon="🥤", layout='centered', initial_sidebar_state="collapsed")
 
-col1, col2 = st.columns([2, 2])
-
 def load_models():
     models = []
     for mn in MODEL_NAMES:
@@ -21,12 +19,6 @@ def load_models():
 def load_model(modelfile):
 	loaded_model = pickle.load(open(f"{PATH}/{modelfile}.pkl", 'rb'))
 	return loaded_model
-
-def display_drinkable(name, prediction):
-    if prediction.item() == 1:
-        col1.success(f"{name} : It is safe to drink that water!")
-    else:
-        col1.error(f"{name} : It is NOT safe to drink that water...")
 
 
 def main():
@@ -38,7 +30,13 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    # col1,col2  = st.columns([2,2])
+    col1,col2  = st.columns([2,2])
+
+    def display_drinkable(name_model, prediction_result):
+        if prediction_result.item() == 1:
+            col1.success(f"{name_model} : It is safe to drink that water!")
+        else:
+            col1.error(f"{name_model} : It is NOT safe to drink that water...")
 
     with col1:
         with st.expander(" ℹ️ Information", expanded=True):
