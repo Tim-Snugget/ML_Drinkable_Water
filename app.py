@@ -23,7 +23,7 @@ def load_models():
     return models
 
 def load_model(modelfile):
-	loaded_model = pickle.load(open(f"{PATH}/{modelfile}.pkl", 'rb'))
+	loaded_model = (modelfile, pickle.load(open(f"{PATH}/{modelfile}.pkl", 'rb')))
 	return loaded_model
 
 
@@ -36,25 +36,25 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    st.text(y_test.shape)
-    st.text(y_test.shape)
-    st.text(type(y_test))
+    # st.text(y_test.shape)
+    # st.text(y_test.shape)
+    # st.text(type(y_test))
 
     col1,col2  = st.columns([2,2])
 
     def display_drinkable(loaded_model, X_test):
         name_model, model = loaded_model
         prediction = model.predict(X_test)
-        st.text(prediction.shape)
+        # st.text(prediction.shape)
         if prediction.item() == 1:
-            if not disp_accuracy:
-                col1.success(f"{name_model} : It is safe to drink that water!")
+            # if not disp_accuracy:
+            col1.success(f"{name_model} : It is safe to drink that water!")
             # else:
                 # accuracy = accuracy_score(y_test, prediction)
                 # col1.success("{} : It is safe to drink that water!\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
         else:
-            if not disp_accuracy:
-                col1.error(f"{name_model} : It is NOT safe to drink that water...")
+            # if not disp_accuracy:
+            col1.error(f"{name_model} : It is NOT safe to drink that water...")
             # else:
             #     accuracy = accuracy_score(y_test, prediction)
             #     col1.error("{} : It is NOT safe to drink that water...\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
@@ -84,7 +84,7 @@ def main():
         trihalomethanes = st.slider("Trihalomethanes", min_value=0.74, max_value=124.00, value=40.0, step=0.5, help="THMs can be found in water treated with chlorine.")
         turbidity = st.slider("Turbidity", min_value=1.45, max_value=6.74, value=3.0, step=0.05, help="The turbidity of water depends on the quantity of solid matter present in the suspended state.")
         AI_model = st.selectbox("AI model", ['All'] + MODEL_NAMES, index=0, help="Wanted model to predict whether the water is drinkable or not!")
-        disp_accuracy = st.checkbox("Display Accuracy Score", value=False, help="Accuracy level of the model displayed.")
+        # disp_accuracy = st.checkbox("Display Accuracy Score", value=False, help="Accuracy level of the model displayed.")
 
         feature_list = [pH, hardness, solids, chloramines, sulfate, conductivity, organic_carbon, trihalomethanes, turbidity]
         single_pred = np.array(feature_list).reshape(1,-1)
@@ -102,7 +102,7 @@ def main():
             else:
                 loaded_model = load_model(AI_model)
                 # prediction = loaded_model.predict(single_pred)
-                display_drinkable(loaded_model, single_pred )
+                display_drinkable(loaded_model, single_pred)
 
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 

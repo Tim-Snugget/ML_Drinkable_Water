@@ -248,3 +248,9 @@ for name, model in models:
 
     save_model(name, model)
 
+# print(y_test)
+# print(y_test.shape)
+# print(type(y_test))
+# np.savetxt('./misc/y_test.txt', y_test)
+
+y_test.to_csv('./misc/y_test.txt')

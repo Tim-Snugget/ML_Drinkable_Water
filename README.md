@@ -19,7 +19,7 @@ It contains samples of 3,276 different water bodies.
 
 ### [Attributes information:]()
 
-* **pH**: The Acid-Base property of the water. Recommanded value is between 6.5 and 8.5.
+* **pH**: The Acid-Base property of the water. Recommended value is between 6.5 and 8.5.
 * **Hardness** : Concentration of calcium and magnesium salts.
 * **Solids** : The ability for the water to dissolve solids (minerals).
 * **Chloramines** : Water disinfectants concentration (recommended amount is 4mg/L).
