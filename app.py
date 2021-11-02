@@ -10,9 +10,7 @@ MODEL_NAMES = ['Logistic_Regression', 'Decision_Tree', 'Gradient_Boosting', 'Ran
                'Gaussian_NB', 'SVC']
 PATH = "./models"
 
-# y_test = np.loadtxt('./misc/y_test.txt')
-# y_test = np.array(y_test).reshape(1, -1)
-# y_test = pd.Series.from_csv('./misc/y_test.txt')
+y_test = pd.read_csv('./misc/y_test.csv', header=None, index_col=0, squeeze=True)
 
 st.set_page_config(page_title="Drinkable Water", page_icon="🥤", layout='centered', initial_sidebar_state="collapsed")
 
@@ -36,28 +34,23 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    # st.text(y_test.shape)
-    # st.text(y_test.shape)
-    # st.text(type(y_test))
-
     col1,col2  = st.columns([2,2])
 
     def display_drinkable(loaded_model, X_test):
         name_model, model = loaded_model
         prediction = model.predict(X_test)
-        # st.text(prediction.shape)
         if prediction.item() == 1:
-            # if not disp_accuracy:
-            col1.success(f"{name_model} : It is safe to drink that water!")
-            # else:
-                # accuracy = accuracy_score(y_test, prediction)
-                # col1.success("{} : It is safe to drink that water!\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
+            if not disp_accuracy:
+                col1.success(f"{name_model} : It is safe to drink that water!")
+            else:
+                accuracy = accuracy_score(y_test, prediction)
+                col1.success("{} : It is safe to drink that water!\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
         else:
-            # if not disp_accuracy:
-            col1.error(f"{name_model} : It is NOT safe to drink that water...")
-            # else:
-            #     accuracy = accuracy_score(y_test, prediction)
-            #     col1.error("{} : It is NOT safe to drink that water...\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
+            if not disp_accuracy:
+                col1.error(f"{name_model} : It is NOT safe to drink that water...")
+            else:
+                accuracy = accuracy_score(y_test, prediction)
+                col1.error("{} : It is NOT safe to drink that water...\nAccuracy of {:.2f}%".format(name_model, accuracy*100))
 
     with col1:
         with st.expander(" ℹ️ Information", expanded=True):
@@ -84,7 +77,7 @@ def main():
         trihalomethanes = st.slider("Trihalomethanes", min_value=0.74, max_value=124.00, value=40.0, step=0.5, help="THMs can be found in water treated with chlorine.")
         turbidity = st.slider("Turbidity", min_value=1.45, max_value=6.74, value=3.0, step=0.05, help="The turbidity of water depends on the quantity of solid matter present in the suspended state.")
         AI_model = st.selectbox("AI model", ['All'] + MODEL_NAMES, index=0, help="Wanted model to predict whether the water is drinkable or not!")
-        # disp_accuracy = st.checkbox("Display Accuracy Score", value=False, help="Accuracy level of the model displayed.")
+        disp_accuracy = st.checkbox("Display Accuracy Score", value=False, help="Accuracy level of the model displayed.")
 
         feature_list = [pH, hardness, solids, chloramines, sulfate, conductivity, organic_carbon, trihalomethanes, turbidity]
         single_pred = np.array(feature_list).reshape(1,-1)

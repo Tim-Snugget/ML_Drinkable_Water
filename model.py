@@ -253,4 +253,4 @@ for name, model in models:
 # print(type(y_test))
 # np.savetxt('./misc/y_test.txt', y_test)
 
-y_test.to_csv('./misc/y_test.txt')
+y_test.to_csv('./misc/y_test.csv')
