@@ -46,13 +46,20 @@ It contains samples of 3,276 different water bodies.
 # [Demo](https://share.streamlit.io/tim-snugget/ml_drinkable_water/main/app.py)
 Live Demo : https://share.streamlit.io/tim-snugget/ml_drinkable_water/main/app.py
 
-![](https://media.discordapp.net/attachments/897066717052801037/904338073209430057/unknown.png?width=577&height=676)
-![](https://media.discordapp.net/attachments/897066717052801037/904338102548582410/unknown.png?width=559&height=676)
+![](https://media.discordapp.net/attachments/554614449676353536/905105688206929930/unknown.png?width=581&height=676)
+![](https://media.discordapp.net/attachments/554614449676353536/905105817026592798/unknown.png?width=478&height=676)
+![](https://cdn.discordapp.com/attachments/554614449676353536/905105987248222238/unknown.png)  
+*The drowndown list at the bottom of the selections allow the user to select the model used to make the prediction*
 
 # [Github and Contributors](https://github.com/Tim-Snugget/ML_Drinkable_Water)
 * [Aldric Liottier](https://github.com/aldricLiottier)
 * [Pierre Marcurat](https://github.com/3uph0riah)
 * [Timothé "Tim-Snugget" Fertin](https://github.com/Tim-Snugget)
+
+# [Usage]()
+Feel free to clone the repository and use it to deploy your own web app and test your models.  
+To train your models, run ```python model.py``` with a ./models folder (if it has been deleted previously).
+To deploy your application, use ```streamlit run app.py``` with all required dependencies installed.
 
 # References
 EduFlow
